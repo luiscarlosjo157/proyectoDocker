@@ -7,7 +7,7 @@ services:
     environment:
       # **IMPORTANTE**: Usa los mismos valores que en tu archivo application.properties
       MYSQL_ROOT_PASSWORD: luis1234 # Contraseña para el usuario root
-      MYSQL_DATABASE: db_user_springboot
+      MYSQL_DATABASE: users-resenas
       MYSQL_USER: testuser # Usuario que usará Spring Boot
       MYSQL_PASSWORD: luis1234 # Contraseña para el usuario de Spring Boot
     ports:

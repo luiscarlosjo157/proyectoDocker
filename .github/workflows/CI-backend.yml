@@ -19,7 +19,7 @@ jobs:
         image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: luis1234
-          MYSQL_DATABASE: db_user_springboot
+          MYSQL_DATABASE: users-resenas
           MYSQL_USER: testuser
           MYSQL_PASSWORD: luis1234
         ports:
@@ -51,7 +51,7 @@ jobs:
       - name: Compilar y ejecutar pruebas con Maven
         # 2. Inyectar variables de entorno para la conexión a la base de datos
         env:
-          SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db_user_springboot # 'mysql' es el nombre del servicio
+          SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/users-resenas # 'mysql' es el nombre del servicio
           SPRING_DATASOURCE_USERNAME: testuser
           SPRING_DATASOURCE_PASSWORD: luis1234
         run: ./mvnw clean verify
