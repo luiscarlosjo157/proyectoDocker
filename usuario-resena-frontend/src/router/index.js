@@ -6,7 +6,6 @@ import ProductDetailView from '@/views/ProductDetailView.vue';
 const routes = [
   {
     // Si el usuario va a la raíz del sitio ('/'), lo redirigimos
-    // a la página de productos.
     path: '/',
     redirect: '/productos'
   },
