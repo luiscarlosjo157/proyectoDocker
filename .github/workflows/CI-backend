@@ -12,7 +12,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./backen-usersapp
+        working-directory: ./usuario-resena-backen
     
     services:
       mysql:
