@@ -1,0 +1,39 @@
+name:  CI/CD Frontend (Vue 3)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'usuario-resena-frontend/**'
+jobs:
+  ci_frontend:
+    runs-on: ubuntu-latest
+    
+    defaults:
+      run:
+        working-directory: ./usuario-resena-frontend
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22' 
+      - name: Instalar dependencias
+        run: npm install
+        working-directory: ./usuario-resena-frontend 
+
+      - name: Ejecutar Linting
+        run: npm run lint
+      
+      - name: Compilar y verificar (Build Check)
+        run: npm run build
+      
+      - name: Subir Artifacto de Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-vue-app
+          path: frontend/dist 
+          retention-days: 1 
