@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - 'backen-usersapp/**'
+      - 'usuario-resena-backen/**'
 jobs:
   check_backend_ci:
     runs-on: ubuntu-latest
