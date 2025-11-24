@@ -7,7 +7,6 @@ import { RouterLink, RouterView } from 'vue-router';
     <nav>
       <!-- Estos enlaces ahora usarán el router para navegar sin recargar la página -->
       <RouterLink to="/productos">Productos</RouterLink>
-      <!-- Puedes agregar más enlaces aquí a futuro -->
     </nav>
   </header>
 
