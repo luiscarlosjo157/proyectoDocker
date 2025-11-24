@@ -18,7 +18,7 @@ import com.usuarios_resena.services.ReviewService;
 
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173", "http://localhost", "http://localhost:80"}) 
 @RequestMapping("/api/reviews")
 public class ReviewController {
 

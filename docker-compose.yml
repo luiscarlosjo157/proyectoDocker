@@ -1,0 +1,62 @@
+version: '3.8'
+services:
+  # --- Base de Datos MySQL ---
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: luis1234
+      MYSQL_DATABASE: users-resenas
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: luis1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - mi-red-app
+
+  # --- API Principal (Spring Boot) ---
+  backend-java:
+    build: ./usuario-resena-backen  # Asegúrate de que esta ruta sea la correcta (ej. ./backend-java)
+    container_name: spring_app
+    depends_on:
+      - db
+      - sentiment-api
+    ports:
+      - "8080:8080"
+    environment:
+      # Sobreescribimos la URL de la DB aquí para usar 'db' en lugar de localhost
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/users-resenas?serverTimezone=UTC&allowPublicKeyRetrieval=true&useSSL=false
+      SPRING_DATASOURCE_USERNAME: testuser
+      SPRING_DATASOURCE_PASSWORD: luis1234
+      
+    
+      # api.sentimientos.url <- es la que usamos en tu SentimentAnalysisService
+      API_SENTIMIENTOS_URL: http://sentiment-api:5000 
+      
+    networks:
+      - mi-red-app
+
+  sentiment-api:
+    build: ./analisis-sentimientos 
+    container_name: python_sentiment
+    ports:
+      - "5000:5000"
+    networks:
+      - mi-red-app
+
+  frontend:
+    build: ./usuario-resena-frontend 
+    container_name: vue_client
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-java
+    networks:
+      - mi-red-app
+
+networks:
+  mi-red-app:
+    driver: bridge
